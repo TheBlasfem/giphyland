@@ -1,0 +1,19 @@
+{
+  "name": "giphyland",
+  "version": "1.0.0",
+  "description": "Remember your favourite gifs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheBlasfem/giphyland.git"
+  },
+  "author": "Julio Lopez Montalvo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TheBlasfem/giphyland/issues"
+  },
+  "homepage": "https://github.com/TheBlasfem/giphyland#readme"
+}

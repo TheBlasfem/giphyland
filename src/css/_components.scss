@@ -150,30 +150,31 @@
     }
   }
   .main-photo {
-    display: block;
-    position: relative;
-    padding-top: 69.15%;
-    background: #E9E9E9;
-    overflow: hidden;
+    //FIX ME: SEE WHAT OF THIS STYLES WE NEED TO MANTAIN
+    // display: block;
+    // position: relative;
+    // padding-top: 69.15%;
+    // background: #E9E9E9;
+    // overflow: hidden;
 
 
-    & .photo-fader {
-      opacity: 0;
-      @include transition(opacity 0.2s ease-out);
+    // & .photo-fader {
+    //   opacity: 0;
+    //   @include transition(opacity 0.2s ease-out);
 
-      &.loaded {
-        opacity: 1;
-      }
-    }
+    //   &.loaded {
+    //     opacity: 1;
+    //   }
+    // }
 
 
-    & img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      display: block;
-      width: 100%;
-    }
+    // & img {
+    //   position: absolute;
+    //   top: 0;
+    //   left: 0;
+    //   display: block;
+    //   width: 100%;
+    // }
   }
 
   @supports (object-fit: cover) {

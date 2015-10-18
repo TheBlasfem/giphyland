@@ -1,0 +1,13 @@
+{{#each this}}
+  <article class="photo">
+    <h1>
+      <a href="{{bitly_gif_url}}">
+        <span class="main-photo">
+          <span class="photo-fader">
+            <img src="{{#with images}}{{#with downsized}}{{url}}{{/with}}{{/with}}" alt="" class="main-photo-img">
+          </span>
+        </span>
+      </a>
+    </h1>
+  </article>
+{{/each}}

@@ -5,13 +5,17 @@ var giphy = require('./giphy');
 var photosEl = document.querySelector('.photos');
 var utils = require('./utils');
 var photosTemplate = require('./views/photos.hbs');
+var refreshButton = document.querySelector('button.refresh');
 
 //Initial Load
 var liveDataFetched = getGifsData('cats').then(function(result) {
   if (!result) return false;
-  console.log(result.data[0]);
   updatePage(result.data);
   return true;
+});
+
+liveDataFetched.then(function(){
+  hideSpinner();
 });
 
 //Register Service Worker
@@ -23,6 +27,10 @@ if ('serviceWorker' in navigator) {
   });
 }
 
+
+function hideSpinner() {
+  refreshButton.classList.remove('loading');
+}
 
 function getGifsData(searchTerm) {
   return giphy.search(searchTerm, {

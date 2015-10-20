@@ -1,3 +1,6 @@
+window.Promise = window.Promise || require('es6-promise').Promise;
+require('whatwg-fetch');
+
 var giphy = require('./giphy');
 var photosEl = document.querySelector('.photos');
 var utils = require('./utils');
@@ -14,10 +17,8 @@ var liveDataFetched = getGifsData('cats').then(function(result) {
 //Register Service Worker
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('./sw.js').then(function(registration) {
-    // Registration was successful
     console.log('ServiceWorker registration successful with scope: ', registration.scope);
   }).catch(function(err) {
-    // registration failed :(
     console.log('ServiceWorker registration failed: ', err);
   });
 }

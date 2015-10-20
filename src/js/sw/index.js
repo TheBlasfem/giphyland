@@ -19,18 +19,14 @@ self.addEventListener('install', function(event) {
 self.addEventListener('fetch', function(event) {
   event.respondWith(
     caches.match(event.request).catch(function(){
-
       var fetchRequest = event.request.clone();
 
       return fetch(fetchRequest).then(function(response) {
-          //To allow for efficient memory usage, you can only read a response/request's body once. In the code above, .clone() is used to create additional copies that can be read separately.
           var responseToCache = response.clone();
-
           caches.open(CACHE_NAME)
             .then(function(cache) {
               cache.put(event.request, responseToCache);
             });
-
           return response;
         }
       );

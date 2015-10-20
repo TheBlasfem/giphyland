@@ -1,6 +1,11 @@
 window.Promise = window.Promise || require('es6-promise').Promise;
 require('whatwg-fetch');
 
+// force https
+if ((!location.port || location.port == "80") && location.protocol != 'https:') {
+  location.protocol = 'https:';
+}
+
 var giphy = require('./giphy');
 var photosEl = document.querySelector('.photos');
 var utils = require('./utils');

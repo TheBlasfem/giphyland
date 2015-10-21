@@ -64,7 +64,7 @@ function GiphyAPIResponse(request){
       var responseToCache = response.clone();
       caches.open(CACHE_NAME)
         .then(function(cache) {
-          cache.put(event.request, responseToCache);
+          cache.put(request, responseToCache);
         });
       return response;
     });

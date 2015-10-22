@@ -39,18 +39,18 @@ self.addEventListener('fetch', function(event) {
     event.respondWith(GiphyAPIResponse(event.request));
   }else{
     event.respondWith(
-      caches.match(event.request).catch(function(){
+      caches.match(event.request).then(function(response){
+        if(response) return response;
         var fetchRequest = event.request.clone();
 
-        return fetch(fetchRequest).then(function(response) {
-            var responseToCache = response.clone();
-            caches.open(CACHE_NAME)
-              .then(function(cache) {
-                cache.put(event.request, responseToCache);
-              });
-            return response;
-          }
-        );
+        return fetch(fetchRequest).then(function(response){
+          var responseToCache = response.clone();
+          caches.open(CACHE_NAME)
+            .then(function(cache) {
+              cache.put(event.request, responseToCache);
+            });
+          return response;
+        });
       })
     );
   }

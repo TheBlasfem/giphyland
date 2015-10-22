@@ -19,7 +19,15 @@ var liveDataFetched = getGifsData('cats').then(function(result) {
   return true;
 });
 
-liveDataFetched.then(function(){
+var cachedDataFetched = getCachedGifsData('cats').then(function(result) {
+  if (!result) return false;
+  updatePage(result.data);
+  return true;
+});
+
+liveDataFetched.then(function(fetched){
+  return fetched || cachedDataFetched;
+}).then(function(){
   hideSpinner();
 });
 
@@ -43,6 +51,19 @@ function getGifsData(searchTerm) {
   }).catch(function(){
     return null;
   });
+}
+
+function getCachedGifsData(searchTerm) {
+  if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+    return giphy.search(searchTerm, {
+      headers: {'x-use-cache-only': '1'}
+    }).catch(function() {
+      return null;
+    });
+  }
+  else {
+    return Promise.resolve(null);
+  }
 }
 
 function updatePage(data) {

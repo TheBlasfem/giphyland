@@ -11,17 +11,19 @@ var photosEl = document.querySelector('.photos');
 var utils = require('./utils');
 var photosTemplate = require('./views/photos.hbs');
 var refreshButton = document.querySelector('button.refresh');
+var showingLiveData = false;
 
 //Initial Load
 var liveDataFetched = getGifsData('cats').then(function(result) {
   if (!result) return false;
   updatePage(result.data);
+  showingLiveData = true;
   return true;
 });
 
 var cachedDataFetched = getCachedGifsData('cats').then(function(result) {
   if (!result) return false;
-  updatePage(result.data);
+  if(!showingLiveData) updatePage(result.data);
   return true;
 });
 

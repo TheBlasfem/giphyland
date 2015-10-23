@@ -4,7 +4,8 @@ var CACHE_NAME = 'giphyland-v2';
 var urlsToCache = [
   './',
   '/css/all.css',
-  '/js/page.js'
+  '/js/page.js',
+  '/img/cat-icon.png'
 ];
 
 self.addEventListener('install', function(event) {

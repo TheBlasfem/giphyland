@@ -1,6 +1,6 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"./src/js/sw/index.js":[function(require,module,exports){
 require('serviceworker-cache-polyfill');
-var CACHE_NAME = 'giphyland-v2';
+var CACHE_NAME = 'giphyland-v3';
 
 var urlsToCache = [
   './',
@@ -19,7 +19,7 @@ self.addEventListener('install', function(event) {
 });
 
 self.addEventListener('activate', function(event) {
-  var cacheWhitelist = ['giphyland-v2'];
+  var cacheWhitelist = ['giphyland-v3'];
   event.waitUntil(
     caches.keys().then(function(cacheNames) {
       return Promise.all(

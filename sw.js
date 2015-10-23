@@ -33,29 +33,16 @@ self.addEventListener('activate', function(event) {
   );
 });
 
-// self.addEventListener('fetch', function(event) {
-//   var requestURL = new URL(event.request.url);
 
-//   if (requestURL.hostname == 'api.giphy.com') {
-//     event.respondWith(GiphyAPIResponse(event.request));
-//   }else{
-//     event.respondWith(
-//       caches.match(event.request).then(function(response){
-//         if(response) return response;
-//         var fetchRequest = event.request.clone();
+self.addEventListener('fetch', function(event){
+  event.respondWith(
+    caches.match(event.request).then(function(response){
+      if(response) return response;
+      return fetch(event.request);
+    })
+  );
+});
 
-//         return fetch(fetchRequest).then(function(response){
-//           var responseToCache = response.clone();
-//           caches.open(CACHE_NAME)
-//             .then(function(cache) {
-//               cache.put(event.request, responseToCache);
-//             });
-//           return response;
-//         });
-//       })
-//     );
-//   }
-// });
 
 function GiphyAPIResponse(request){
   if (request.headers.get('x-use-cache-only')) {

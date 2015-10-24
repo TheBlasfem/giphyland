@@ -33,16 +33,35 @@ self.addEventListener('activate', function(event) {
   );
 });
 
+self.addEventListener('fetch', function(event) {
+  var requestURL = new URL(event.request.url);
 
-self.addEventListener('fetch', function(event){
-  event.respondWith(
-    caches.match(event.request).then(function(response){
-      if(response) return response;
-      return fetch(event.request);
-    })
-  );
+  if (requestURL.hostname == 'api.giphy.com') {
+    event.respondWith(GiphyAPIResponse(event.request));
+  }else{
+    event.respondWith(
+      caches.match(event.request).then(function(response){
+        if(response) return response;
+
+        //To allow for efficient memory usage, you can only read a response/request's body once
+        //Request and Response objects are streams. In the code above, .clone() is used to create additional copies that can be consumed separately.
+        var fetchRequest = event.request.clone();
+
+        return fetch(fetchRequest).then(function(response){
+          if(response.status !== 200) return response;
+
+          var responseToCache = response.clone();
+          caches.open(CACHE_NAME)
+            .then(function(cache) {
+              cache.put(event.request, responseToCache);
+            });
+
+          return response;
+        });
+      })
+    );
+  }
 });
-
 
 function GiphyAPIResponse(request){
   if (request.headers.get('x-use-cache-only')) {

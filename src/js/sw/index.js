@@ -1,5 +1,5 @@
 require('serviceworker-cache-polyfill');
-var CACHE_NAME = 'giphyland-v3';
+var CACHE_NAME = 'giphyland-v5';
 
 var urlsToCache = [
   './',
@@ -18,7 +18,7 @@ self.addEventListener('install', function(event) {
 });
 
 self.addEventListener('activate', function(event) {
-  var cacheWhitelist = ['giphyland-v3'];
+  var cacheWhitelist = ['giphyland-v5'];
   event.waitUntil(
     caches.keys().then(function(cacheNames) {
       return Promise.all(

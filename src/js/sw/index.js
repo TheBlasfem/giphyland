@@ -67,6 +67,7 @@ function GiphyAPIResponse(request){
     return caches.match(request);
   }else{
     return fetch(request).then(function(response){
+      if(response.status !== 200) return response;
       var responseToCache = response.clone();
       caches.open(CACHE_NAME)
         .then(function(cache) {
